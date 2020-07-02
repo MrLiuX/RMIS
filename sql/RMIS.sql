@@ -11,7 +11,7 @@
  Target Server Version : 50729
  File Encoding         : 65001
 
- Date: 03/07/2020 04:23:46
+ Date: 03/07/2020 05:35:48
 */
 
 SET NAMES utf8mb4;
@@ -287,6 +287,23 @@ CREATE TABLE `道路完整信息`  (
 
 -- ----------------------------
 -- Records of 道路完整信息
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for 道路综合评价表
+-- ----------------------------
+DROP TABLE IF EXISTS `道路综合评价表`;
+CREATE TABLE `道路综合评价表`  (
+  `道路编号` int(6) NOT NULL,
+  `评价日期` int(4) NOT NULL,
+  `PQI` decimal(10, 5) NOT NULL,
+  `评级` varchar(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  PRIMARY KEY (`道路编号`, `评价日期`) USING BTREE,
+  CONSTRAINT `道路编号9` FOREIGN KEY (`道路编号`) REFERENCES `道路关键信息` (`道路编号`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of 道路综合评价表
 -- ----------------------------
 
 -- ----------------------------
