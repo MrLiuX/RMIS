@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.LinkedHashMap;
 
 public class Account {
-    public static void addAccount(String account,String password,String name,String level) throws SQLException
+    public static void addAccount(String account,String password,String name,String level)
     {
         Connection connection=DbConnect.getConnection();
         PreparedStatement pst=null;
