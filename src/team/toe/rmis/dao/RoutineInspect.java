@@ -3,11 +3,14 @@ package team.toe.rmis.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedHashMap;
 
 public class RoutineInspect {
     public static void inspect(LinkedHashMap<String, String> inspection) {
+        Date date=new Date();
+
         Connection connection = DbConnect.getConnection();
         PreparedStatement pst = null;
         String sqlCommand = "INSERT INTO 道路设施日常巡查情况记录 (巡查人员,道路编号,损坏类型,损坏位置及损坏情况描述,备注) VALUES(?,?,?,?,?);";
@@ -26,4 +29,13 @@ public class RoutineInspect {
             e.printStackTrace();
         }
     }
+
+//    public static void main(String[] args) {
+////        Date date=new Date();
+//        //SimpleDateFormat date=new SimpleDateFormat("yyyy-mm-dd");
+//        //System.out.println(date);
+//        SimpleDateFormat ft = new SimpleDateFormat ("yyyy-MM-dd hh:mm:ss");
+//
+//        System.out.println("当前时间为: " + ft.format(dNow));
+//    }
 }
