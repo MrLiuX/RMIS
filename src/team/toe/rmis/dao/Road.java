@@ -2,6 +2,7 @@ package team.toe.rmis.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Map;
 
@@ -52,5 +53,33 @@ public class Road {
         pst.executeUpdate();
         pst.close();
         connection.close();
+    }
+
+    public static boolean isExist(int id)
+    {
+        Connection connection=DbConnect.getConnection();
+        PreparedStatement pst=null;
+        ResultSet result=null;
+        String sqlCommand="SELECT 道路编号 FROM 道路关键信息 WHERE 道路编号=?";
+        try
+        {
+            pst=connection.prepareStatement(sqlCommand);
+            pst.setInt(1,id);
+            pst.executeQuery();
+            result=pst.getResultSet();
+            pst.close();
+            connection.close();
+            if(result.next()==false)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 }
