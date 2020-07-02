@@ -82,4 +82,31 @@ public class Road {
         }
         return false;
     }
+
+    public static String getRoadType(int roadId)
+    {
+        Connection connection=DbConnect.getConnection();
+        PreparedStatement pst=null;
+        String sqlCommand="SELECT 路面类型 FROM 道路关键信息 WHERE 道路编号=?";
+        try
+        {
+            pst=connection.prepareStatement(sqlCommand);
+            pst.setInt(1,roadId);
+            pst.executeQuery();
+            ResultSet result=pst.getResultSet();
+            if(result.next()!=false)
+            {
+                return result.getString("路面类型");
+            }
+            else
+            {
+                System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");//TODO
+            }
+            pst.close();
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return "error";
+    }
 }

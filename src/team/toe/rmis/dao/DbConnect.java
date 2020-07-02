@@ -13,8 +13,8 @@ import java.sql.Statement;
         {
             pst=connection.prepareStatement(sqlCommand);
             //pst.executeQuery();
-            //ResultSet resultSet=pst.getResultSet();
-            //while(resultSet.next()){}
+            //ResultSet result=pst.getResultSet();
+            //while(result.next()){}
 
             pst.executeUpdate();
             pst.close();
