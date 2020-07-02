@@ -29,7 +29,7 @@ public class Road {
         connection.close();
     }
 
-    public static void deleteRoad(int id) throws SQLException //传入道路编号
+    public static void deleteRoad(int id) throws SQLException //传入道路编号来删除道路
     {
         Connection connection=DbConnect.getConnection();
         PreparedStatement pst=null;
@@ -43,7 +43,7 @@ public class Road {
 
     public static void selectRoad(int id) throws SQLException{} //TODO
 
-    public static void alterRoadName(int id,String roadName) throws SQLException {
+    public static void alterRoadName(int id,String roadName) throws SQLException {//道路改名
         Connection connection=DbConnect.getConnection();
         PreparedStatement pst=null;
         String sqlCommand="UPDATE 道路关键信息 SET 道路名称=? WHERE 道路编号=?;";
@@ -55,7 +55,7 @@ public class Road {
         connection.close();
     }
 
-    public static boolean isExist(int id)
+    public static boolean isExist(int id)//判断道路是否存在
     {
         Connection connection=DbConnect.getConnection();
         PreparedStatement pst=null;
