@@ -24,6 +24,12 @@ import java.sql.Statement;
         }
 */
 
+/*
+        Date date=new Date();
+        SimpleDateFormat spDate=new SimpleDateFormat("yyyy");
+        System.out.println(spDate.format(date));
+*/
+
 //INSERT INTO table_name ( field1, field2,...fieldN ) VALUES(?,?,?);
 //DELETE FROM table_name [WHERE Clause]
 //SELECT column_name,column_name FROM table_name WHERE Clause
