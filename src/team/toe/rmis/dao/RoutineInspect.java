@@ -65,11 +65,10 @@ public class RoutineInspect {
     }
 
 //    public static void main(String[] args) {
-//
-//        LinkedHashMap<String,String> inspection=new LinkedHashMap<String,String>();
-//        inspection.put("巡查人员","刘旭");
-//        inspection.put("道路编号","1234");
-//        inspection.put("损坏类型","线裂");
-//        RoutineInspect.inspect(inspection);
+//        ArrayList<LinkedHashMap<String,String>> inspection=RoutineInspect.getAllRecord();;
+//        for(int i=0;!inspection.isEmpty();i++)
+//        {
+//            System.out.println(inspection.get(i));
+//        }
 //    }
 }
