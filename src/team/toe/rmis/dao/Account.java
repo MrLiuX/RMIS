@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
 public class Account {
@@ -89,12 +90,16 @@ public class Account {
             pst.setString(1,_account);
             pst.executeQuery();
             ResultSet resultSet=pst.getResultSet();
-            while(resultSet.next())
+            if(resultSet.next()!=false)
             {
                 account.put("账号",resultSet.getString("账号"));
                 account.put("密码",resultSet.getString("密码"));
                 account.put("姓名",resultSet.getString("姓名"));
                 account.put("账户等级",resultSet.getString("账户等级"));
+            }
+            else
+            {
+                account.put("账号","账号不存在");
             }
             pst.close();
             connection.close();
@@ -128,5 +133,33 @@ public class Account {
         {
             return false;
         }
+    }
+
+    public static ArrayList<LinkedHashMap<String,String>> getAllAccount()
+    {
+        ArrayList<LinkedHashMap<String,String>> accounts=new ArrayList<LinkedHashMap<String,String>>();
+        int i=0;
+        Connection connection=DbConnect.getConnection();
+        PreparedStatement pst=null;
+        String sqlCommand="SELECT * FROM 系统人员";
+        try
+        {
+            pst=connection.prepareStatement(sqlCommand);
+            pst.executeQuery();
+            ResultSet result=pst.getResultSet();
+            while(result.next()){
+                accounts.get(i).put("账号",result.getString("账号"));
+                accounts.get(i).put("密码",result.getString("密码"));
+                accounts.get(i).put("姓名",result.getString("姓名"));
+                accounts.get(i).put("账户等级",result.getString("账户等级"));
+                i=i+1;
+            }
+            pst.executeUpdate();
+            pst.close();
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return accounts;
     }
 }
