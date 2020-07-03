@@ -69,7 +69,7 @@ public class Road {
             result=pst.getResultSet();
             pst.close();
             connection.close();
-            if(result.next()==false)
+            if(!result.next())
             {
                 return false;
             }

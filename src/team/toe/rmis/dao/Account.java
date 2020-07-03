@@ -112,7 +112,7 @@ public class Account {
     public static boolean matching(String account,String password)
     {
         LinkedHashMap<String,String> personnel=selectAccountOfAccount(account);
-        if(password==personnel.get("密码"))
+        if(password.equals(personnel.get("密码")))
         {
             return true;
         }
@@ -125,7 +125,7 @@ public class Account {
     public static boolean isAdmin(String account)
     {
         LinkedHashMap<String,String> personnel=selectAccountOfAccount(account);
-        if(personnel.get("账户等级")=="管理员")
+        if(personnel.get("账户等级").equals("管理员"))
         {
             return true;
         }
@@ -161,5 +161,17 @@ public class Account {
             e.printStackTrace();
         }
         return accounts;
+    }
+
+    public static void main(String[] args) {
+        if(matching("123","123"))
+        {
+            System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+
+        }
+        else
+        {
+            System.out.println("????????????????????????????");
+        }
     }
 }
