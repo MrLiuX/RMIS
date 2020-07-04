@@ -19,52 +19,64 @@ public class Road {
         pst.setString(3,road.get("道路养护等级"));
         pst.setString(4,road.get("路面类型"));
         pst.executeUpdate();
+        pst.close();
+        connection.close();
+
+        Connection connection1=DbConnect.getConnection();
+        PreparedStatement pst1;
         String sqlCommand="INSERT INTO 道路完整信息(" +
                 "道路编号,道路走向,树池面积,起点,终点,设计单位,施工单位,道路等级,设计时速,路幅宽度,道路长度,道路面积,AADT," +
                 "交通量等级,所属乡镇,管理分类,管理单位,养护单位,建造年月,路面厚度,基层类型,基层厚度,车行道数,通行方向,机动车道宽度范围," +
                 "左侧机动车道宽度范围,右侧机动车道宽度范围,车行道面积,有无公交车专用道,侧石类型,侧石长度,平石类型,平石长度,检查井数量," +
                 "雨水口数量,路名牌数量,标志牌数量) " +
                 "values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
-        pst=connection.prepareStatement(sqlCommand);
-        pst.setInt(1,Integer.parseInt(road.get("道路编号")));
-        pst.setString(2,road.get("道路走向"));
-        pst.setString(3,road.get("树池面积"));
-        pst.setString(4,road.get("起点"));
-        pst.setString(5,road.get("终点"));
-        pst.setString(6,road.get("设计单位"));
-        pst.setString(7,road.get("施工单位"));
-        pst.setString(8,road.get("道路等级"));
-        pst.setString(9,road.get("设计时速"));
-        pst.setString(10,road.get("路幅宽度"));
-        pst.setString(11,road.get("道路长度"));
-        pst.setString(12,road.get("道路面积"));
-        pst.setString(13,road.get("AADT"));
-        pst.setString(14,road.get("交通量等级"));
-        pst.setString(15,road.get("所属乡镇"));
-        pst.setString(16,road.get("管理分类"));
-        pst.setString(17,road.get("管理单位"));
-        pst.setString(18,road.get("养护单位"));
-        pst.setString(19,road.get("建造年月"));
-        pst.setString(20,road.get("路面厚度"));
-        pst.setString(21,road.get("基层类型"));
-        pst.setString(22,road.get("基层厚度"));
-        pst.setString(23,road.get("车行道数"));
-        pst.setString(24,road.get("通行方向"));
-        pst.setString(25,road.get("机动车道宽度范围"));
-        pst.setString(26,road.get("左侧机动车道宽度范围"));
-        pst.setString(27,road.get("右侧机动车道宽度范围"));
-        pst.setString(28,road.get("车行道面积"));
-        pst.setString(29,road.get("有无公交车专用道"));
-        pst.setString(30,road.get("侧石类型"));
-        pst.setString(31,road.get("侧石长度"));
-        pst.setString(32,road.get("平石类型"));
-        pst.setString(33,road.get("平石长度"));
-        pst.setString(34,road.get("检查井数量"));
-        pst.setString(35,road.get("雨水口数量"));
-        pst.setString(36,road.get("路名牌数量"));
-        pst.setString(37,road.get("标志牌数量"));
-        pst.executeUpdate();
-        pst.close();
+//        String sqlCommand="INSERT INTO 道路完整信息(" +
+//                "标志牌数量,道路走向,树池面积,起点,终点,设计单位,施工单位,道路等级,设计时速,路幅宽度,道路长度,道路面积,AADT," +
+//                "交通量等级,所属乡镇,管理分类,管理单位,养护单位,建造年月,路面厚度,基层类型,基层厚度,车行道数,通行方向,机动车道宽度范围," +
+//                "左侧机动车道宽度范围,右侧机动车道宽度范围,车行道面积,有无公交车专用道,侧石类型,侧石长度,平石类型,平石长度,检查井数量," +
+//                "雨水口数量,路名牌数量) " +
+//                "values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
+        pst1=connection1.prepareStatement(sqlCommand);
+//        pst.setInt(1,Integer.parseInt(road.get("道路编号")));
+        pst1.setInt(1,Integer.parseInt(road.get("道路编号")));
+        pst1.setString(2,road.get("道路走向"));
+        pst1.setString(3,road.get("树池面积"));
+        pst1.setString(4,road.get("起点"));
+        pst1.setString(5,road.get("终点"));
+        pst1.setString(6,road.get("设计单位"));
+        pst1.setString(7,road.get("施工单位"));
+        pst1.setString(8,road.get("道路等级"));
+        pst1.setString(9,road.get("设计时速"));
+        pst1.setString(10,road.get("路幅宽度"));
+        pst1.setString(11,road.get("道路长度"));
+        pst1.setString(12,road.get("道路面积"));
+        pst1.setString(13,road.get("AADT"));
+        pst1.setString(14,road.get("交通量等级"));
+        pst1.setString(15,road.get("所属乡镇"));
+        pst1.setString(16,road.get("管理分类"));
+        pst1.setString(17,road.get("管理单位"));
+        pst1.setString(18,road.get("养护单位"));
+        pst1.setString(19,road.get("建造年月"));
+        pst1.setString(20,road.get("路面厚度"));
+        pst1.setString(21,road.get("基层类型"));
+        pst1.setString(22,road.get("基层厚度"));
+        pst1.setString(23,road.get("车行道数"));
+        pst1.setString(24,road.get("通行方向"));
+        pst1.setString(25,road.get("机动车道宽度范围"));
+        pst1.setString(26,road.get("左侧机动车道宽度范围"));
+        pst1.setString(27,road.get("右侧机动车道宽度范围"));
+        pst1.setString(28,road.get("车行道面积"));
+        pst1.setString(29,road.get("有无公交车专用道"));
+        pst1.setString(30,road.get("侧石类型"));
+        pst1.setString(31,road.get("侧石长度"));
+        pst1.setString(32,road.get("平石类型"));
+        pst1.setString(33,road.get("平石长度"));
+        pst1.setString(34,road.get("检查井数量"));
+        pst1.setString(35,road.get("雨水口数量"));
+        pst1.setString(36,road.get("路名牌数量"));
+        pst1.setString(37,road.get("标志牌数量"));
+        pst1.executeUpdate();
+        pst1.close();
         connection.close();
     }
 
@@ -206,5 +218,13 @@ public class Road {
             e.printStackTrace();
         }
         return "error";
+    }
+
+    public static void main(String[] args) throws SQLException {
+        LinkedHashMap<String,String> road=new LinkedHashMap<>();
+        road.put("道路编号","999");
+        road.put("道路养护等级","A");
+        road.put("路面类型","水泥");
+        Road.addRoad(road);
     }
 }
