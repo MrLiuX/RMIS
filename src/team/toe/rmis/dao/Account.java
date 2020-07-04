@@ -11,7 +11,7 @@ public class Account {
     public static void addAccount(String account,String password,String name,String level)
     {
         Connection connection=DbConnect.getConnection();
-        PreparedStatement pst=null;
+        PreparedStatement pst;
         String sqlCommand="INSERT INTO 系统人员(账号,密码,姓名,账户等级) VALUES(?,?,?,?);";
         try
         {
@@ -31,7 +31,7 @@ public class Account {
     public static void deletedAccount(String accountOrName)
     {
         Connection connection=DbConnect.getConnection();
-        PreparedStatement pst=null;
+        PreparedStatement pst;
         String sqlCommand="DELETE FROM 系统人员 WHERE 账号=? ;";
         try
         {
@@ -51,11 +51,11 @@ public class Account {
         }
     }
 
-    public static LinkedHashMap selectAccountOfName(String name)
+    public static LinkedHashMap<String,String> selectAccountOfName(String name)
     {
         Connection connection=DbConnect.getConnection();
-        PreparedStatement pst=null;
-        LinkedHashMap<String,String> account = new LinkedHashMap<String,String>();
+        PreparedStatement pst;
+        LinkedHashMap<String,String> account = new LinkedHashMap<>();
         String sqlCommand="SELECT * FROM 系统人员 WHERE 姓名=?";
         try
         {
@@ -78,11 +78,11 @@ public class Account {
         return account;
     }
 
-    public static LinkedHashMap selectAccountOfAccount(String _account)
+    public static LinkedHashMap<String,String> selectAccountOfAccount(String _account)
     {
         Connection connection=DbConnect.getConnection();
-        PreparedStatement pst=null;
-        LinkedHashMap<String,String> account = new LinkedHashMap<String,String>();
+        PreparedStatement pst;
+        LinkedHashMap<String,String> account = new LinkedHashMap<>();
         String sqlCommand="SELECT * FROM 系统人员 WHERE 账号=?";
         try
         {
@@ -90,16 +90,13 @@ public class Account {
             pst.setString(1,_account);
             pst.executeQuery();
             ResultSet resultSet=pst.getResultSet();
-            if(resultSet.next()!=false)
-            {
+            if (!resultSet.next()) {
+                account.put("账号","账号不存在");
+            } else {
                 account.put("账号",resultSet.getString("账号"));
                 account.put("密码",resultSet.getString("密码"));
                 account.put("姓名",resultSet.getString("姓名"));
                 account.put("账户等级",resultSet.getString("账户等级"));
-            }
-            else
-            {
-                account.put("账号","账号不存在");
             }
             pst.close();
             connection.close();
@@ -111,36 +108,22 @@ public class Account {
 
     public static boolean matching(String account,String password)
     {
-        LinkedHashMap<String,String> personnel=selectAccountOfAccount(account);
-        if(password.equals(personnel.get("密码")))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        LinkedHashMap<String,String> personnel;
+        personnel = selectAccountOfAccount(account);
+        return password.equals(personnel.get("密码"));
     }
 
     public static boolean isAdmin(String account)
     {
         LinkedHashMap<String,String> personnel=selectAccountOfAccount(account);
-        if(personnel.get("账户等级").equals("管理员"))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return personnel.get("账户等级").equals("管理员");
     }
 
     public static ArrayList<LinkedHashMap<String,String>> getAllAccount()
     {
-        ArrayList<LinkedHashMap<String,String>> accounts=new ArrayList<LinkedHashMap<String,String>>();
-        int i=0;
+        ArrayList<LinkedHashMap<String,String>> accounts= new ArrayList<>();
         Connection connection=DbConnect.getConnection();
-        PreparedStatement pst=null;
+        PreparedStatement pst;
         String sqlCommand="SELECT * FROM 系统人员";
         try
         {
@@ -148,13 +131,13 @@ public class Account {
             pst.executeQuery();
             ResultSet result=pst.getResultSet();
             while(result.next()){
-                accounts.get(i).put("账号",result.getString("账号"));
-                accounts.get(i).put("密码",result.getString("密码"));
-                accounts.get(i).put("姓名",result.getString("姓名"));
-                accounts.get(i).put("账户等级",result.getString("账户等级"));
-                i=i+1;
+                LinkedHashMap<String,String> account= new LinkedHashMap<>();
+                account.put("账号",result.getString("账号"));
+                account.put("密码",result.getString("密码"));
+                account.put("姓名",result.getString("姓名"));
+                account.put("账户等级",result.getString("账户等级"));
+                accounts.add(account);
             }
-            pst.executeUpdate();
             pst.close();
             connection.close();
         } catch (SQLException e) {
