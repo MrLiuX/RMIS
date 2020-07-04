@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -161,6 +162,69 @@ public class Road {
             e.printStackTrace();
         }
         return road;
+    }
+
+    public static ArrayList<LinkedHashMap<String, String>> getRoads()
+    {
+        ArrayList<LinkedHashMap<String, String>> roads = new ArrayList<>();
+        Connection connection=DbConnect.getConnection();
+        PreparedStatement pst;
+        String sqlCommand="SELECT * FROM 道路关键信息 LEFT JOIN 道路完整信息 道 on 道路关键信息.道路编号 = 道.道路编号";
+        try
+        {
+            pst=connection.prepareStatement(sqlCommand);
+            pst.executeQuery();
+            ResultSet result=pst.getResultSet();
+            while(result.next()) {
+                LinkedHashMap<String, String> road = new LinkedHashMap<>();
+                road.put("道路编号", Integer.toString(result.getInt("道路编号")));
+                road.put("道路走向", result.getString("道路走向"));
+                road.put("树池面积", result.getString("树池面积"));
+                road.put("起点", result.getString("起点"));
+                road.put("终点", result.getString("终点"));
+                road.put("设计单位", result.getString("设计单位"));
+                road.put("施工单位", result.getString("施工单位"));
+                road.put("道路等级", result.getString("道路等级"));
+                road.put("设计时速", result.getString("设计时速"));
+                road.put("路幅宽度", result.getString("路幅宽度"));
+                road.put("道路长度", result.getString("道路长度"));
+                road.put("道路面积", result.getString("道路面积"));
+                road.put("AADT", result.getString("AADT"));
+                road.put("交通量等级", result.getString("交通量等级"));
+                road.put("所属乡镇", result.getString("所属乡镇"));
+                road.put("管理分类", result.getString("管理分类"));
+                road.put("管理单位", result.getString("管理单位"));
+                road.put("养护单位", result.getString("养护单位"));
+                road.put("建造年月", result.getString("建造年月"));
+                road.put("路面厚度", result.getString("路面厚度"));
+                road.put("基层类型", result.getString("基层类型"));
+                road.put("基层厚度", result.getString("基层厚度"));
+                road.put("车行道数", result.getString("车行道数"));
+                road.put("通行方向", result.getString("通行方向"));
+                road.put("机动车道宽度范围", result.getString("机动车道宽度范围"));
+                road.put("左侧机动车道宽度范围", result.getString("左侧机动车道宽度范围"));
+                road.put("右侧机动车道宽度范围", result.getString("右侧机动车道宽度范围"));
+                road.put("车行道面积", result.getString("车行道面积"));
+                road.put("有无公交车专用道", result.getString("有无公交车专用道"));
+                road.put("侧石类型", result.getString("侧石类型"));
+                road.put("侧石长度", result.getString("侧石长度"));
+                road.put("平石类型", result.getString("平石类型"));
+                road.put("平石长度", result.getString("平石长度"));
+                road.put("检查井数量", result.getString("检查井数量"));
+                road.put("雨水口数量", result.getString("雨水口数量"));
+                road.put("路名牌数量", result.getString("路名牌数量"));
+                road.put("标志牌数量", result.getString("标志牌数量"));
+                road.put("道路名称", result.getString("道路名称"));
+                road.put("道路养护等级", result.getString("道路养护等级"));
+                road.put("路面类型", result.getString("路面类型"));
+                roads.add(road);
+            }
+            pst.close();
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return roads;
     }
 
     public static void alterRoadName(int id,String roadName) throws SQLException {//道路改名
