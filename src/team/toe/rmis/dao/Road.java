@@ -12,6 +12,13 @@ public class Road {
     {
         Connection connection=DbConnect.getConnection();
         PreparedStatement pst;
+        String sqlCommand2="INSERT INTO 道路关键信息(道路编号,道路名称,道路养护等级,路面类型) VALUES(?,?,?,?);";
+        pst=connection.prepareStatement(sqlCommand2);
+        pst.setInt(1,Integer.parseInt(road.get("道路编号")));
+        pst.setString(2,road.get("道路名称"));
+        pst.setString(3,road.get("道路养护等级"));
+        pst.setString(4,road.get("路面类型"));
+        pst.executeUpdate();
         String sqlCommand="INSERT INTO 道路完整信息(" +
                 "道路编号,道路走向,树池面积,起点,终点,设计单位,施工单位,道路等级,设计时速,路幅宽度,道路长度,道路面积,AADT," +
                 "交通量等级,所属乡镇,管理分类,管理单位,养护单位,建造年月,路面厚度,基层类型,基层厚度,车行道数,通行方向,机动车道宽度范围," +
@@ -56,13 +63,6 @@ public class Road {
         pst.setString(35,road.get("雨水口数量"));
         pst.setString(36,road.get("路名牌数量"));
         pst.setString(37,road.get("标志牌数量"));
-        pst.executeUpdate();
-        String sqlCommand2="INSERT INTO 道路关键信息(道路编号,道路名称,道路养护等级,路面类型) VALUES(?,?,?,?);";
-        pst=connection.prepareStatement(sqlCommand2);
-        pst.setInt(1,Integer.parseInt(road.get("道路编号")));
-        pst.setString(2,road.get("道路名称"));
-        pst.setString(3,road.get("道路养护等级"));
-        pst.setString(4,road.get("路面类型"));
         pst.executeUpdate();
         pst.close();
         connection.close();
