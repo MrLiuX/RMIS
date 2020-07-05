@@ -137,7 +137,7 @@ public class DamageInspect {
             }
         }
         Connection connection=DbConnect.getConnection();
-        PreparedStatement pst=null;
+        PreparedStatement pst;
         String sqlCommand="SELECT 扣分 FROM 损坏单项扣分表 " +
                 "WHERE 路面类型=? AND 损坏类型=? AND 损坏密度=?;";
         try
@@ -148,7 +148,7 @@ public class DamageInspect {
             pst.setDouble(3,damageRatio);
             pst.executeQuery();
             ResultSet result=pst.getResultSet();
-            if(result.next()!=false)
+            if(result.next())
             {
                 return result.getInt("扣分");
             }
@@ -172,7 +172,7 @@ public class DamageInspect {
         double inspectArea=0;
 
         Connection connection=DbConnect.getConnection();
-        PreparedStatement pst=null;
+        PreparedStatement pst;
         String sqlCommand="SELECT 检查总长,检查总宽,道路编号 FROM 道路设施路面损害情况 WHERE 检查编号=?;";
         try
         {
@@ -180,7 +180,7 @@ public class DamageInspect {
             pst.setInt(1,inspectId);
             pst.executeQuery();
             ResultSet result=pst.getResultSet();
-            if(result.next()!=false)
+            if(result.next())
             {
                 inspectArea=result.getDouble("检查总长")*result.getDouble("检查总宽");
                 roadId=result.getInt("道路编号");
@@ -387,7 +387,7 @@ public class DamageInspect {
         SimpleDateFormat spDate=new SimpleDateFormat("yyyy-MM-dd");
 
         Connection connection=DbConnect.getConnection();
-        PreparedStatement pst=null;
+        PreparedStatement pst;
         String sqlCommand="INSERT INTO 道路设施路面损害情况(日期,检查人员,道路编号,起止位置,检查总长,检查总宽)" +
                 " VALUES (?,?,?,?,?,?);";
         pst=connection.prepareStatement(sqlCommand);
@@ -406,26 +406,25 @@ public class DamageInspect {
         pst.setInt(2,Integer.parseInt(inspection.get("道路编号")));
         pst.executeQuery();
         ResultSet result=pst.getResultSet();
-        if(result.next()!=false)
+        if(result.next())
         {
             id=result.getInt("检查编号");
-            for(int i=0;i<damage.size();i++)
-            {
-                double damageLength=Double.parseDouble(damage.get(i).get("损坏长"));
-                double damageWide=Double.parseDouble(damage.get(i).get("损坏宽"));
-                double damageHigh=Double.parseDouble(damage.get(i).get("损坏高"));
-                String sqlCommand1="INSERT INTO 损坏详情 (" +
+            for (LinkedHashMap<String, String> stringStringLinkedHashMap : damage) {
+                double damageLength = Double.parseDouble(stringStringLinkedHashMap.get("损坏长"));
+                double damageWide = Double.parseDouble(stringStringLinkedHashMap.get("损坏宽"));
+                double damageHigh = Double.parseDouble(stringStringLinkedHashMap.get("损坏高"));
+                String sqlCommand1 = "INSERT INTO 损坏详情 (" +
                         "检查编号,损坏类型,损坏长,损坏宽,损坏高,损坏面积,损坏位置及损坏情况描述)" +
                         " VALUES (?,?,?,?,?,?,?);";
-                pst=connection.prepareStatement(sqlCommand1);
-                pst.setInt(1,id);
-                pst.setString(2,damage.get(i).get("损坏类型"));
-                pst.setDouble(3,damageLength);
-                pst.setDouble(4,damageWide);
-                pst.setDouble(5,damageHigh);
-                pst.setDouble(6,calculateArea(Road.getRoadType(roadId),damage.get(i).get("损坏类型"),
-                        damageLength,damageWide,damageHigh));
-                pst.setString(7,damage.get(i).get("损坏位置及损坏情况描述"));
+                pst = connection.prepareStatement(sqlCommand1);
+                pst.setInt(1, id);
+                pst.setString(2, stringStringLinkedHashMap.get("损坏类型"));
+                pst.setDouble(3, damageLength);
+                pst.setDouble(4, damageWide);
+                pst.setDouble(5, damageHigh);
+                pst.setDouble(6, calculateArea(Road.getRoadType(roadId), stringStringLinkedHashMap.get("损坏类型"),
+                        damageLength, damageWide, damageHigh));
+                pst.setString(7, stringStringLinkedHashMap.get("损坏位置及损坏情况描述"));
                 pst.executeUpdate();
             }
             pst.close();

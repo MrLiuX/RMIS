@@ -9,7 +9,7 @@ import java.sql.*;
 
 /*
         Connection connection=DbConnect.getConnection();
-        PreparedStatement pst=null;
+        PreparedStatement pst;
         String sqlCommand="";
         try
         {

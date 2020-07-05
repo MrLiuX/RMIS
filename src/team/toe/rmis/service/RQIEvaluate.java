@@ -2,6 +2,9 @@ package team.toe.rmis.service;
 
 import team.toe.rmis.service.abstr.Evaluate;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class RQIEvaluate extends Evaluate {
     @Override
     public String getLevel(double resultingIndex) {
@@ -16,8 +19,10 @@ public class RQIEvaluate extends Evaluate {
     }
 
     @Override
-    public double getResultingIndex(double index) {
-        double RQI=4.98-0.34*index;
+    public double getResultingIndex(int roadId) {
+        Date date = new Date();
+        SimpleDateFormat spDate = new SimpleDateFormat("yyyy");
+        double RQI=4.98-0.34* team.toe.rmis.dao.Evaluate.getIRI(roadId,spDate.format(date));
         if(RQI<0)
         {
             RQI = 0;
