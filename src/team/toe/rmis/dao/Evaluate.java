@@ -115,4 +115,42 @@ public class Evaluate {
         evaluation.put("PCI",Double.valueOf(getEvaluation(roadId,"路面损坏状况评价","PCI",date_year).get("PCI")));
         return evaluation;
     }
+
+    public static double getPCI(int roadId,int date_year)
+    {
+        int id=0;
+        double get=0;
+        Connection connection=DbConnect.getConnection();
+        PreparedStatement pst;
+        String sqlCommand="SELECT 检查编号 FROM 道路设施路面损害情况 WHERE 日期=? AND 道路编号=?";
+        try
+        {
+            pst=connection.prepareStatement(sqlCommand);
+            pst.setInt(1,date_year);
+            pst.setInt(2,roadId);
+            pst.executeQuery();
+            ResultSet result=pst.getResultSet();
+            if(result.next())
+            {
+                id=result.getInt("检查编号");
+            }
+            pst.close();
+
+            PreparedStatement pst2;
+            String sqlCommand2="SELECT 单项扣分值 FROM 损坏扣分表 WHERE 记录编号=?";
+            pst2=connection.prepareStatement(sqlCommand2);
+            pst2.setInt(1,id);
+            pst2.executeQuery();
+            ResultSet result2=pst.getResultSet();
+            while (result2.next())
+            {
+                get=get+result2.getDouble("单项扣分值");
+            }
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return get;
+    }
+
 }

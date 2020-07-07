@@ -200,7 +200,7 @@ public class DamageInspect {
                 String damageType=result.getString("损坏类型");
                 double damageArea=result.getDouble("损坏面积");
 
-                String sqlCommand_="INSERT INTO 损坏扣分表(路面类型,损坏类型,损坏面积,损坏密度,单项扣分值) VALUES (?,?,?,?,?);";
+                String sqlCommand_="INSERT INTO 损坏扣分表(路面类型,损坏类型,损坏面积,损坏密度,单项扣分值,检查编号) VALUES (?,?,?,?,?,?);";
                 PreparedStatement pst_=connection.prepareStatement(sqlCommand_);
                 if(roadId==0)
                 {
@@ -214,6 +214,7 @@ public class DamageInspect {
                 double damageRatio=damageArea/inspectArea;
                 pst_.setDouble(4,damageRatio);
                 pst_.setInt(5,deduct(Road.getRoadType(roadId),damageType,damageRatio));
+                pst_.setInt(6,inspectId);
                 pst_.executeUpdate();
                 pst_.close();
             }
@@ -431,6 +432,25 @@ public class DamageInspect {
             connection.close();
             damageDeduct(id);
         }
+    }
+
+    public static void main(String[] args) throws SQLException {
+        LinkedHashMap<String,String> inspection = new LinkedHashMap<>();
+        ArrayList<LinkedHashMap<String,String>> damages = new ArrayList<>();
+        LinkedHashMap<String,String> damage = new LinkedHashMap<>();
+//        inspection.put("检查编号","123456");
+        inspection.put("日期","2020-12-14");
+        inspection.put("检查人员","刘旭");
+        inspection.put("道路编号","615487");
+        inspection.put("检查总长","20");
+        inspection.put("检查总宽","6");
+
+        damage.put("损坏类型","坑洞");
+        damage.put("损坏长","13");
+        damage.put("损坏宽","1.6");
+        damage.put("损坏高","0.1");
+        damages.add(damage);
+        inspect(inspection,damages);
     }
 }
 

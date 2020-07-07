@@ -2,6 +2,9 @@ package team.toe.rmis.service;
 
 import team.toe.rmis.service.abstr.Evaluate;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class PCIEvaluate extends Evaluate {
     @Override
     public String getLevel(double resultingIndex) {
@@ -17,12 +20,17 @@ public class PCIEvaluate extends Evaluate {
 
     @Override
     public double getResultingIndex(int roadId) {
-//        double PCI;
-//        double n=4;
-//        double m;
-//        if(PCI<0)
-//            PCI=0;
-        return 0;
+        Date date = new Date();
+        SimpleDateFormat spDate = new SimpleDateFormat("yyyy");
+        double PCI;
+        double n=4;
+        double m;
+        double u=0.33;
+        double w=3*u*u*u-5.5*u*u+3.5*u;
+        PCI=100-team.toe.rmis.dao.Evaluate.getPCI(roadId,Integer.parseInt(spDate.format(date)))*w;
+        if(PCI<0)
+            PCI=0;
+        return PCI;
     }
 
     @Override
