@@ -2,8 +2,10 @@ package team.toe.rmis.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedHashMap;
 
@@ -30,5 +32,33 @@ public class FlatnessInspect {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public static ArrayList<LinkedHashMap<String,String>> getInspections()
+    {
+        ArrayList<LinkedHashMap<String,String>> inspections = new ArrayList<>();
+        Connection connection=DbConnect.getConnection();
+        PreparedStatement pst;
+        String sqlCommand="SELECT * FROM 道路路面平整度检测;";
+        try
+        {
+            pst=connection.prepareStatement(sqlCommand);
+            pst.executeQuery();
+            ResultSet result=pst.getResultSet();
+            while(result.next()){
+                LinkedHashMap<String,String> inspection = new LinkedHashMap<>();
+                inspection.put("检测日期",result.getString("检测日期"));
+                inspection.put("检测人员",result.getString("检测人员"));
+                inspection.put("道路编号",result.getString("道路编号"));
+                inspection.put("IRI",result.getString("IRI"));
+                inspection.put("备注",result.getString("备注"));
+                inspections.add(inspection);
+            }
+            pst.close();
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return inspections;
     }
 }
