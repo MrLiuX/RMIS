@@ -106,31 +106,6 @@ public class Account {
         return account;
     }
 
-    public static boolean isExist(String account)
-    {
-        LinkedHashMap<String,String> person=selectAccountOfAccount(account);
-        if(person.get("账号").equals("账号不存在"))
-        {
-            return false;
-        }
-        else
-        {
-            return true;
-        }
-    }
-
-    public static boolean matching(String account,String password)
-    {
-        LinkedHashMap<String,String> personnel;
-        personnel = selectAccountOfAccount(account);
-        return password.equals(personnel.get("密码"));
-    }
-
-    public static boolean isAdmin(String account)
-    {
-        LinkedHashMap<String,String> personnel=selectAccountOfAccount(account);
-        return personnel.get("账户等级").equals("管理员");
-    }
 
     public static ArrayList<LinkedHashMap<String,String>> getAllAccount()
     {

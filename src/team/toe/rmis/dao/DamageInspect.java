@@ -371,7 +371,6 @@ public class DamageInspect {
                             return 0;
                     }
                 }
-                System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");//TODO
                 break;
             }
         }
@@ -434,23 +433,23 @@ public class DamageInspect {
         }
     }
 
-    public static void main(String[] args) throws SQLException {
-        LinkedHashMap<String,String> inspection = new LinkedHashMap<>();
-        ArrayList<LinkedHashMap<String,String>> damages = new ArrayList<>();
-        LinkedHashMap<String,String> damage = new LinkedHashMap<>();
-//        inspection.put("检查编号","123456");
-        inspection.put("日期","2020-12-14");
-        inspection.put("检查人员","刘旭");
-        inspection.put("道路编号","615487");
-        inspection.put("检查总长","20");
-        inspection.put("检查总宽","6");
-
-        damage.put("损坏类型","坑洞");
-        damage.put("损坏长","13");
-        damage.put("损坏宽","1.6");
-        damage.put("损坏高","0.1");
-        damages.add(damage);
-        inspect(inspection,damages);
-    }
+//    public static void main(String[] args) throws SQLException {
+//        LinkedHashMap<String,String> inspection = new LinkedHashMap<>();
+//        ArrayList<LinkedHashMap<String,String>> damages = new ArrayList<>();
+//        LinkedHashMap<String,String> damage = new LinkedHashMap<>();
+////        inspection.put("检查编号","123456");
+//        inspection.put("日期","2020-12-14");
+//        inspection.put("检查人员","刘旭");
+//        inspection.put("道路编号","615487");
+//        inspection.put("检查总长","20");
+//        inspection.put("检查总宽","6");
+//
+//        damage.put("损坏类型","坑洞");
+//        damage.put("损坏长","13");
+//        damage.put("损坏宽","1.6");
+//        damage.put("损坏高","0.1");
+//        damages.add(damage);
+//        inspect(inspection,damages);
+//    }
 }
 
