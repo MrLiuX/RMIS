@@ -1,5 +1,7 @@
 package team.toe.rmis.dao;
 
+import team.toe.rmis.service.PQIEvaluate;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -221,6 +223,8 @@ public class DamageInspect {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        PQIEvaluate evaluate=new PQIEvaluate();
+        evaluate.evaluate(roadId);
     }
 
     public static double calculateArea(

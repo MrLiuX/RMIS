@@ -1,5 +1,7 @@
 package team.toe.rmis.dao;
 
+import team.toe.rmis.service.RQIEvaluate;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -32,6 +34,8 @@ public class FlatnessInspect {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        RQIEvaluate evaluate=new RQIEvaluate();
+        evaluate.evaluate(Integer.parseInt(inspection.get("道路编号")));
     }
 
     public static ArrayList<LinkedHashMap<String,String>> getInspections()
