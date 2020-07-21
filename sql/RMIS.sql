@@ -11,7 +11,7 @@
  Target Server Version : 50729
  File Encoding         : 65001
 
- Date: 11/07/2020 02:36:13
+ Date: 20/07/2020 15:33:37
 */
 
 SET NAMES utf8mb4;
@@ -191,11 +191,25 @@ CREATE TABLE `损坏扣分表`  (
   INDEX `损坏类型02`(`损坏类型`) USING BTREE,
   INDEX `3`(`检查编号`) USING BTREE,
   CONSTRAINT `3` FOREIGN KEY (`检查编号`) REFERENCES `道路设施路面损害情况` (`检查编号`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 23 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 26 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of 损坏扣分表
 -- ----------------------------
+INSERT INTO `损坏扣分表` VALUES (000025, '水泥', '线裂', 0.20000, 0.20000, 0.00000);
+INSERT INTO `损坏扣分表` VALUES (000025, '水泥', '表面裂纹', 4.00000, 4.00000, 8.00000);
+INSERT INTO `损坏扣分表` VALUES (000025, '水泥', '线裂', 0.20000, 0.20000, 0.00000);
+INSERT INTO `损坏扣分表` VALUES (000025, '水泥', '表面裂纹', 4.00000, 4.00000, 8.00000);
+INSERT INTO `损坏扣分表` VALUES (000025, '水泥', '线裂', 0.20000, 0.20000, 0.00000);
+INSERT INTO `损坏扣分表` VALUES (000025, '水泥', '线裂', 0.20000, 0.20000, 0.00000);
+INSERT INTO `损坏扣分表` VALUES (000025, '水泥', '表面裂纹', 4.00000, 4.00000, 8.00000);
+INSERT INTO `损坏扣分表` VALUES (000025, '水泥', '线裂', 0.20000, 0.20000, 0.00000);
+INSERT INTO `损坏扣分表` VALUES (000025, '水泥', '线裂', 0.20000, 0.20000, 0.00000);
+INSERT INTO `损坏扣分表` VALUES (000025, '水泥', '线裂', 0.20000, 0.20000, 0.00000);
+INSERT INTO `损坏扣分表` VALUES (000025, '水泥', '表面裂纹', 4.00000, 4.00000, 8.00000);
+INSERT INTO `损坏扣分表` VALUES (000025, '水泥', '线裂', 0.20000, 0.20000, 0.00000);
+INSERT INTO `损坏扣分表` VALUES (000025, '水泥', '线裂', 0.20000, 0.20000, 0.00000);
+INSERT INTO `损坏扣分表` VALUES (000025, '水泥', '线裂', 0.20000, 0.20000, 0.00000);
 
 -- ----------------------------
 -- Table structure for 损坏类型
@@ -249,11 +263,16 @@ CREATE TABLE `损坏详情`  (
   INDEX `损坏类型2`(`损坏类型`) USING BTREE,
   INDEX `1`(`检查编号`) USING BTREE,
   CONSTRAINT `1` FOREIGN KEY (`检查编号`) REFERENCES `道路设施路面损害情况` (`检查编号`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 23 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 26 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of 损坏详情
 -- ----------------------------
+INSERT INTO `损坏详情` VALUES (000025, '线裂', 1.00000, 1.00000, 1.00000, 0.20000, NULL, NULL);
+INSERT INTO `损坏详情` VALUES (000025, '表面裂纹', 2.00000, 2.00000, 2.00000, 4.00000, NULL, NULL);
+INSERT INTO `损坏详情` VALUES (000025, '线裂', 1.00000, 1.00000, 1.00000, 0.20000, NULL, NULL);
+INSERT INTO `损坏详情` VALUES (000025, '线裂', 1.00000, 1.00000, 1.00000, 0.20000, NULL, NULL);
+INSERT INTO `损坏详情` VALUES (000025, '线裂', 1.00000, 1.00000, 1.00000, 0.20000, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for 系统人员
@@ -272,6 +291,7 @@ CREATE TABLE `系统人员`  (
 -- ----------------------------
 -- Records of 系统人员
 -- ----------------------------
+INSERT INTO `系统人员` VALUES ('shy', '123', '张三', '管理员');
 
 -- ----------------------------
 -- Table structure for 设施损害通知单
@@ -286,11 +306,12 @@ CREATE TABLE `设施损害通知单`  (
   `处理意见` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `技术员` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`通知号`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of 设施损害通知单
 -- ----------------------------
+INSERT INTO `设施损害通知单` VALUES (000002, '2020-12-14', '设施名称', '损坏部位', '损坏原因', '处理意见', '技术员');
 
 -- ----------------------------
 -- Table structure for 账户等级
@@ -323,6 +344,7 @@ CREATE TABLE `路面损坏状况评价`  (
 -- ----------------------------
 -- Records of 路面损坏状况评价
 -- ----------------------------
+INSERT INTO `路面损坏状况评价` VALUES (615487, '2020', '1.57', 'C');
 
 -- ----------------------------
 -- Table structure for 路面类型
@@ -356,6 +378,7 @@ CREATE TABLE `路面行驶质量评价`  (
 -- ----------------------------
 -- Records of 路面行驶质量评价
 -- ----------------------------
+INSERT INTO `路面行驶质量评价` VALUES (615487, 2020, '23', 'a');
 
 -- ----------------------------
 -- Table structure for 道路关键信息
@@ -467,6 +490,7 @@ CREATE TABLE `道路综合评价表`  (
 -- ----------------------------
 -- Records of 道路综合评价表
 -- ----------------------------
+INSERT INTO `道路综合评价表` VALUES (615487, 2020, 2.99000, 'B');
 
 -- ----------------------------
 -- Table structure for 道路设施日常巡查情况记录
@@ -485,11 +509,13 @@ CREATE TABLE `道路设施日常巡查情况记录`  (
   INDEX `巡检损害类型`(`损坏类型`) USING BTREE,
   CONSTRAINT `巡检损害类型` FOREIGN KEY (`损坏类型`) REFERENCES `损坏类型` (`损坏类型`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `道路巡查` FOREIGN KEY (`道路编号`) REFERENCES `道路关键信息` (`道路编号`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 25 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 32 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of 道路设施日常巡查情况记录
 -- ----------------------------
+INSERT INTO `道路设施日常巡查情况记录` VALUES (000029, '2020-07-11', '沙雕', 615487, '线裂', '', ',');
+INSERT INTO `道路设施日常巡查情况记录` VALUES (000031, '2020-07-11', '沙雕', 615487, '坑洞', '', ',');
 
 -- ----------------------------
 -- Table structure for 道路设施路面损害情况
@@ -506,11 +532,16 @@ CREATE TABLE `道路设施路面损害情况`  (
   PRIMARY KEY (`检查编号`) USING BTREE,
   INDEX `道路编号2`(`道路编号`) USING BTREE,
   CONSTRAINT `道路编号2` FOREIGN KEY (`道路编号`) REFERENCES `道路关键信息` (`道路编号`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 25 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 34 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of 道路设施路面损害情况
 -- ----------------------------
+INSERT INTO `道路设施路面损害情况` VALUES (000014, '2020-07-10', '李四', 849126, 'xxx路', 2, 2);
+INSERT INTO `道路设施路面损害情况` VALUES (000025, '2020-07-11', '张三', 615487, '起点', 1, 1);
+INSERT INTO `道路设施路面损害情况` VALUES (000031, '2020-07-11', '刘旭', 615487, '武器', 1, 1);
+INSERT INTO `道路设施路面损害情况` VALUES (000032, '2020-07-11', '刘旭', 615487, '武器', 1, 1);
+INSERT INTO `道路设施路面损害情况` VALUES (000033, '2020-07-11', '刘旭', 615487, '武器', 1, 1);
 
 -- ----------------------------
 -- Table structure for 道路路面平整度检测
@@ -526,10 +557,12 @@ CREATE TABLE `道路路面平整度检测`  (
   PRIMARY KEY (`检测编号`) USING BTREE,
   INDEX `平整度检测道路编号`(`道路编号`) USING BTREE,
   CONSTRAINT `平整度检测道路编号` FOREIGN KEY (`道路编号`) REFERENCES `道路关键信息` (`道路编号`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of 道路路面平整度检测
 -- ----------------------------
+INSERT INTO `道路路面平整度检测` VALUES (000003, '2020-07-11', '张三', 615487, 11, ',');
+INSERT INTO `道路路面平整度检测` VALUES (000004, '2020-07-11', '李四', 639874, 12, '无');
 
 SET FOREIGN_KEY_CHECKS = 1;
